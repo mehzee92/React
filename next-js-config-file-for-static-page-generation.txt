@@ -1,0 +1,34 @@
+-> Add the following code to the "next.config.json"
+-> Then run "npm run build"
+
+-> Then add this line to "package.json -> script" section 
+    "export":"next export -o outdir"
+-> Then update the "exportPathMap" in the next.config.json file. 
+-> Then run "npm run export" and find statically generated code in the "ourdir" folder. 
+
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'standalone',
+  "trailingSlash": true,
+  exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId}) 
+  {
+    return {
+    '/': { page: '/' },
+    '/shop': { page: '/shop' },
+    '/the-rock': { page: '/the-rock' }
+  }
+}, 
+
+eslint: {
+  ignoreDuringBuilds: true,
+}, 
+
+  reactStrictMode: false,
+  swcMinify: true,
+};
+
+module.exports = nextConfig;
+
+
+
